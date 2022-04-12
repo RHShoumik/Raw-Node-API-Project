@@ -8,7 +8,7 @@ Inspired by : Sumit Saha
 
 // dependencies
 const http = require('http');
-const url = require('url');
+const { handleReqRes } = require('./helpers/handleReqRes');
 
 // app object - module scaffolding
 const app = {};
@@ -27,19 +27,7 @@ app.createServer = () => {
 };
 
 // handle Request Response
-app.handleReqRes = (req, res) => {
-    // request handling
-    // get the url and parse it
-    const parseUrl = url.parse(req.url, true);
-    const path = parseUrl.pathname;
-    const trimedPath = path.replace(/^\/+|\/+$/g, '');
-    const method = req.method.toLowerCase();
-    const queryString = parseUrl.query;
-    const headerObject = req.headers;
-    console.log(headerObject);
-    // response handle
-    res.end('Hello Programmers');
-};
+app.handleReqRes = handleReqRes;
 
 // start the server
 app.createServer();
