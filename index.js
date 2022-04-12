@@ -8,18 +8,15 @@ Inspired by : Sumit Saha
 
 // dependencies
 const http = require('http');
+const url = require('url');
 
 // app object - module scaffolding
-const app = {
-    config: {
-        port: 3000,
-    },
-};
+const app = {};
 
 // configaration
-// app.config = {
-//     port: 3000,
-// };
+app.config = {
+    port: 3000,
+};
 
 // create server
 app.createServer = () => {
@@ -31,8 +28,17 @@ app.createServer = () => {
 
 // handle Request Response
 app.handleReqRes = (req, res) => {
+    // request handling
+    // get the url and parse it
+    const parseUrl = url.parse(req.url, true);
+    const path = parseUrl.pathname;
+    const trimedPath = path.replace(/^\/+|\/+$/g, '');
+    const method = req.method.toLowerCase();
+    const queryString = parseUrl.query;
+    const headerObject = req.headers;
+    console.log(headerObject);
     // response handle
-    res.end('Hello World');
+    res.end('Hello Programmers');
 };
 
 // start the server
